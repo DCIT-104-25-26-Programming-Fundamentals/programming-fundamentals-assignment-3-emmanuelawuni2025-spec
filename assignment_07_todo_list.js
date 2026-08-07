@@ -80,5 +80,113 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+// =============================================================================
+// PROGRAMMING FUNDAMENTALS — Assignment 7
+// TASK: Console-Based To-Do List Application
+// =============================================================================
+
+const readlineSync = require('readline-sync');
+
+// Global array to store tasks
+const tasks = [];
+
+/**
+ * Displays all tasks currently in the list with 1-based indexing.
+ */
+function viewTasks() {
+  if (tasks.length === 0) {
+    console.log('\nYour to-do list is currently empty.');
+    return;
+  }
+
+  console.log('\nYour Tasks:');
+  for (let i = 0; i < tasks.length; i++) {
+    console.log(`${i + 1}. ${tasks[i]}`);
+  }
+}
+
+/**
+ * Prompts the user for a task description and adds it to the list.
+ */
+function addTask() {
+  const taskDesc = readlineSync.question('Enter task: ').trim();
+
+  if (taskDesc === '') {
+    console.log('Error: Task description cannot be empty.');
+    return;
+  }
+
+  tasks.push(taskDesc);
+  console.log(`Task added: "${taskDesc}"`);
+}
+
+/**
+ * Displays tasks and deletes the chosen task based on user input.
+ */
+function deleteTask() {
+  if (tasks.length === 0) {
+    console.log('\nNo tasks available to delete.');
+    return;
+  }
+
+  viewTasks();
+  const taskNum = readlineSync.questionInt('\nEnter task number to delete: ');
+
+  // Validate task index (1-based user input converted to 0-based index)
+  if (taskNum < 1 || taskNum > tasks.length) {
+    console.log(`Error: Invalid task number. Please enter a number between 1 and ${tasks.length}.`);
+    return;
+  }
+
+  const removedIndex = taskNum - 1;
+  const removedTask = tasks.splice(removedIndex, 1)[0];
+  console.log(`Task "${removedTask}" has been removed.`);
+}
+
+/**
+ * Displays the application menu options.
+ */
+function displayMenu() {
+  console.log('\n============================');
+  console.log('     TO-DO LIST MENU');
+  console.log('============================');
+  console.log('1. Add task');
+  console.log('2. View tasks');
+  console.log('3. Delete task');
+  console.log('4. Quit');
+}
+
+/**
+ * Main application loop keeping the program active until user quits.
+ */
+function main() {
+  let isRunning = true;
+
+  while (isRunning) {
+    displayMenu();
+    const choice = readlineSync.questionInt('Enter your choice (1-4): ');
+
+    switch (choice) {
+      case 1:
+        addTask();
+        break;
+      case 2:
+        viewTasks();
+        break;
+      case 3:
+        deleteTask();
+        break;
+      case 4:
+        console.log('Goodbye!');
+        isRunning = false;
+        break;
+      default:
+        console.log('Invalid choice! Please select an option from 1 to 4.');
+    }
+  }
+}
+
+// Execute the program
+main();
 
 

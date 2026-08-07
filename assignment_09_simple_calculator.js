@@ -73,5 +73,174 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+// =============================================================================
+// PROGRAMMING FUNDAMENTALS — Assignment 9
+// TASK: Console-Based Simple Calculator
+// =============================================================================
+
+const readlineSync = require('readline-sync');
+
+/**
+ * Adds two numbers.
+ * 
+ * @param {number} a - First number.
+ * @param {number} b - Second number.
+ * @returns {number} Sum of a and b.
+ */
+function add(a, b) {
+  return a + b;
+}
+
+/**
+ * Subtracts second number from first number.
+ * 
+ * @param {number} a - First number.
+ * @param {number} b - Second number.
+ * @returns {number} Difference of a and b.
+ */
+function subtract(a, b) {
+  return a - b;
+}
+
+/**
+ * Multiplies two numbers.
+ * 
+ * @param {number} a - First number.
+ * @param {number} b - Second number.
+ * @returns {number} Product of a and b.
+ */
+function multiply(a, b) {
+  return a * b;
+}
+
+/**
+ * Divides first number by second number.
+ * 
+ * @param {number} a - Dividend.
+ * @param {number} b - Divisor.
+ * @returns {number|null} Quotient or null if dividing by zero.
+ */
+function divide(a, b) {
+  if (b === 0) {
+    return null;
+  }
+  return a / b;
+}
+
+/**
+ * Computes remainder of division of first number by second number.
+ * 
+ * @param {number} a - Dividend.
+ * @param {number} b - Divisor.
+ * @returns {number|null} Remainder or null if divisor is zero.
+ */
+function modulus(a, b) {
+  if (b === 0) {
+    return null;
+  }
+  return a % b;
+}
+
+/**
+ * Raises first number to power of second number.
+ * 
+ * @param {number} base - Base number.
+ * @param {number} exponent - Exponent power.
+ * @returns {number} Base raised to power of exponent.
+ */
+function exponentiate(base, exponent) {
+  return base ** exponent;
+}
+
+/**
+ * Displays calculator menu options.
+ */
+function displayMenu() {
+  console.log('\n============================');
+  console.log('     SIMPLE CALCULATOR');
+  console.log('============================');
+  console.log('1. Addition');
+  console.log('2. Subtraction');
+  console.log('3. Multiplication');
+  console.log('4. Division');
+  console.log('5. Modulus');
+  console.log('6. Exponentiation');
+  console.log('7. Quit');
+}
+
+/**
+ * Formats results cleanly to 2 decimal places when necessary.
+ * 
+ * @param {number} value - Numerical result.
+ * @returns {string} Formatted result string.
+ */
+function formatResult(value) {
+  return Number.isInteger(value) ? value.toString() : value.toFixed(2);
+}
+
+/**
+ * Main interactive loop driving calculator execution.
+ */
+function main() {
+  let isRunning = true;
+
+  while (isRunning) {
+    displayMenu();
+    const choice = readlineSync.questionInt('Select an operation (1-7): ');
+
+    if (choice === 7) {
+      console.log('Goodbye!');
+      isRunning = false;
+      continue;
+    }
+
+    if (choice < 1 || choice > 7) {
+      console.log('Invalid choice! Please select an option between 1 and 7.');
+      continue;
+    }
+
+    const num1 = readlineSync.questionFloat('Enter first number : ');
+    const num2 = readlineSync.questionFloat('Enter second number: ');
+
+    let result;
+    let operatorStr;
+
+    switch (choice) {
+      case 1:
+        result = add(num1, num2);
+        operatorStr = '+';
+        break;
+      case 2:
+        result = subtract(num1, num2);
+        operatorStr = '-';
+        break;
+      case 3:
+        result = multiply(num1, num2);
+        operatorStr = '*';
+        break;
+      case 4:
+        result = divide(num1, num2);
+        operatorStr = '/';
+        break;
+      case 5:
+        result = modulus(num1, num2);
+        operatorStr = '%';
+        break;
+      case 6:
+        result = exponentiate(num1, num2);
+        operatorStr = '**';
+        break;
+    }
+
+    if (result === null) {
+      console.log('Error: Cannot divide by zero.');
+    } else {
+      console.log(`Result: ${num1} ${operatorStr} ${num2} = ${formatResult(result)}`);
+    }
+  }
+}
+
+// Execute the program
+main();
 
 

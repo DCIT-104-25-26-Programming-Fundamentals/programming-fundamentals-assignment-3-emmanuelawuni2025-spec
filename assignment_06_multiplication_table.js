@@ -58,5 +58,73 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+// =============================================================================
+// PROGRAMMING FUNDAMENTALS — Assignment 6
+// TASK: Multiplication Table Generator
+// =============================================================================
+
+const readlineSync = require('readline-sync');
+
+/**
+ * Prints the multiplication table for a single number from 1 to 12.
+ * 
+ * @param {number} num - The number to generate the table for.
+ */
+function printSingleTable(num) {
+  console.log(`\nMultiplication Table for ${num}:`);
+  for (let i = 1; i <= 12; i++) {
+    const paddedMultiplier = String(i).padStart(2, ' ');
+    const paddedResult = String(num * i).padStart(3, ' ');
+    console.log(`${num}  x  ${paddedMultiplier} = ${paddedResult}`);
+  }
+}
+
+/**
+ * Prints multiplication tables for numbers from 1 to N.
+ * 
+ * @param {number} maxNum - The upper limit N.
+ */
+function printMultipleTables(maxNum) {
+  for (let i = 1; i <= maxNum; i++) {
+    printSingleTable(i);
+    if (i < maxNum) {
+      console.log('---------------------------');
+    }
+  }
+}
+
+/**
+ * Main execution function to execute Part A and Part B.
+ */
+function main() {
+  console.log('====================================================');
+  console.log('PART A — Single Table');
+  console.log('====================================================');
+
+  const singleNum = readlineSync.questionInt('Enter a number: ');
+
+  if (singleNum <= 0) {
+    console.log('Error: Please enter a positive integer greater than 0.');
+    return;
+  }
+
+  printSingleTable(singleNum);
+
+  console.log('\n====================================================');
+  console.log('PART B — Tables from 1 to N');
+  console.log('====================================================');
+
+  const maxNum = readlineSync.questionInt('Enter N to generate tables from 1 to N: ');
+
+  if (maxNum <= 0) {
+    console.log('Error: Please enter a positive integer greater than 0.');
+    return;
+  }
+
+  printMultipleTables(maxNum);
+}
+
+// Execute the program
+main();
 
 

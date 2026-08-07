@@ -41,5 +41,49 @@
 // =============================================================================
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
+// =============================================================================
+// PROGRAMMING FUNDAMENTALS — Assignment 1
+// TASK: Prime Number Checker
+// =============================================================================
+
+const readlineSync = require('readline-sync');
+
+/**
+ * Checks whether a given integer is a prime number.
+ * 
+ * @param {number} num - The number to test.
+ * @returns {boolean} True if the number is prime, false otherwise.
+ */
+function isPrime(num) {
+  // Prime numbers must be strictly greater than 1
+  if (num < 2) {
+    return false;
+  }
+
+  // Check for factors up to the square root of num
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false; // Found a factor, so it is not prime
+    }
+  }
+
+  return true; // No factors found, so it is prime
+}
+
+/**
+ * Main execution function to handle input and display results.
+ */
+function main() {
+  const input = readlineSync.questionInt('Enter a number: ');
+
+  if (isPrime(input)) {
+    console.log(`${input} is a prime number.`);
+  } else {
+    console.log(`${input} is NOT a prime number.`);
+  }
+}
+
+// Execute the program
+main();
 
 
